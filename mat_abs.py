@@ -1,9 +1,14 @@
 import numpy as np, cv2
 
-image1 = cv2.imread("images/abs_test1.jpg", cv2.IMREAD_GRAYSCALE) # 명암도 영상 읽기
-image2 = cv2.imread("images/abs_test2.jpg", cv2.IMREAD_GRAYSCALE)
+image1 = cv2.imread("image/abs_test1.jpg", cv2.IMREAD_GRAYSCALE) # 명암도 영상 읽기
+image2 = cv2.imread("image/abs_test2.jpg", cv2.IMREAD_GRAYSCALE)
 if image1 is None or image2 is None: raise Exception("영상 파일 읽기 오류 발생")
 
+
+dif_img1 = cv2.subtract(image1, image2)
+dif_img2 = cv2.subtract(np.int16(image1), np.int16(image2))
+abs_dif1 = np.absolute(dif_img2).astype('uint8')
+abs_dif2 = cv2.absdiff(image1, image2)
 
 
 x, y, w, h = 100, 100, 7, 3
